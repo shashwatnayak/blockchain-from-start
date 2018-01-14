@@ -39,10 +39,6 @@ class blockchain(object):
         return self.last_block['index'] + 1
 
 
-    def new_transaction(self,sender,recipient,amount):
-        # Adds transaction to transactions
-        pass
-
     @staticmethod
     def hash(block):
         # hashes the blocks
