@@ -1,7 +1,8 @@
 import hashlib as hash_algo
 import json
 from time import time
-
+from uuid import uuid4
+#IMPORT FLASK TO SETUP LOCAL HTTP SERVER
 class blockchain(object):
     def __init__(self):
         self.chain = []
@@ -38,6 +39,29 @@ class blockchain(object):
 
         return self.last_block['index'] + 1
 
+
+        def proof_of_work(self, last_proof):
+        """
+        Simple Proof of Work Algorithm:
+
+        """
+
+        proof = 0
+        while self.valid_proof(last_proof, proof) is False:
+            proof += 1
+
+        return proof
+
+    @staticmethod
+    def valid_proof(last_proof, proof):
+        """
+        Validates the Proof: Does hash(last_proof, proof) contain 4 leading zeroes?
+
+        """
+
+        guess = f'{last_proof}{proof}'.encode()
+        guess_hash = hashlib.sha256(guess).hexdigest()
+        return guess_hash[:4] == "0000"
 
     @staticmethod
     def hash(block):
